@@ -2,3 +2,5 @@
 
 [cmd]: https://commandcode.ai/
 
+# cli
+See [cli/taste.md](cli/taste.md)
