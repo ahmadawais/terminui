@@ -159,6 +159,14 @@ Modifier.OVERLINED
 
 Container with borders, titles, and padding:
 
+```
+┌Header────────────────────────────────────────────────┐
+│                                                      │
+│  Content goes here with padding and borders         │
+│                                                      │
+└──────────────────────────────────────────────────────┘
+```
+
 ```typescript
 import { blockBordered, createTitle, renderBlock, Borders } from 'terminui';
 
@@ -178,6 +186,14 @@ frameRenderWidget(frame, renderBlock(block), area);
 
 Text display with wrapping, alignment, and scrolling:
 
+```
+┌Paragraph─────────────────────────────────────────────┐
+│  Long text that wraps automatically to fit the      │
+│  available width. Supports alignment and scrolling  │
+│  for content larger than the viewport.              │
+└──────────────────────────────────────────────────────┘
+```
+
 ```typescript
 import { createParagraph, renderParagraph } from 'terminui';
 
@@ -194,6 +210,16 @@ frameRenderWidget(frame, renderParagraph(p), area);
 ### List
 
 Vertical scrollable list with selection:
+
+```
+┌Menu──────────────────────────────────────────────────┐
+│ ▶ Item 1                                             │
+│   Item 2                                             │
+│   Item 3                                             │
+│   Item 4                                             │
+│   Item 5                                             │
+└──────────────────────────────────────────────────────┘
+```
 
 ```typescript
 import { createList, createListState, renderStatefulList } from 'terminui';
@@ -213,6 +239,15 @@ frameRenderStatefulWidget(frame, renderStatefulList(list), area, state);
 ### Table
 
 Grid data with column constraints:
+
+```
+┌Users─────────────────────────────────────────────────┐
+│ Name       Age  Role                                 │
+│ Alice      42   admin                                │
+│ Bob        37   user                                 │
+│ Charlie    29   user                                 │
+└──────────────────────────────────────────────────────┘
+```
 
 ```typescript
 import { createTable, createRow, renderTable, lengthConstraint, fillConstraint } from 'terminui';
@@ -236,6 +271,13 @@ frameRenderWidget(frame, renderTable(table), area);
 
 Progress bars — unicode block characters or ASCII:
 
+```
+┌Progress──────────────────────────────────────────────┐
+│ ████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ │
+│ 67%                                                  │
+└──────────────────────────────────────────────────────┘
+```
+
 ```typescript
 import { gaugePercent, renderGauge } from 'terminui';
 
@@ -252,6 +294,12 @@ frameRenderWidget(frame, renderGauge(gauge), area);
 
 Horizontal tab selection:
 
+```
+ Dashboard  Logs  Settings
+ ─────────────────────────────────────────────────────
+ Dashboard content displayed here
+```
+
 ```typescript
 import { createTabs, renderTabs } from 'terminui';
 
@@ -266,6 +314,12 @@ frameRenderWidget(frame, renderTabs(tabs), area);
 ### Sparkline
 
 Tiny inline data visualization:
+
+```
+┌CPU───────────────────────────────────────────────────┐
+│ ▁▄▂█▅▃▇▆                                             │
+└──────────────────────────────────────────────────────┘
+```
 
 ```typescript
 import { createSparkline, renderSparkline } from 'terminui';
@@ -282,6 +336,17 @@ frameRenderWidget(frame, renderSparkline(spark), area);
 
 Grouped bar charts (vertical or horizontal):
 
+```
+┌Chart─────────────────────────────────────────────────┐
+│                                                      │
+│   ███   ███   ███                                    │
+│   ███   ███   ███                                    │
+│   ███   ███   ███                                    │
+│   ███   ███   ███                                    │
+│  Group A Group B Group C                            │
+└──────────────────────────────────────────────────────┘
+```
+
 ```typescript
 import { createBar, createBarGroup, createBarChart, renderBarChart } from 'terminui';
 
@@ -296,6 +361,17 @@ frameRenderWidget(frame, renderBarChart(chart), area);
 ### Scrollbar
 
 Scrollbar overlay for any area:
+
+```
+┌Content────────────────────────────────────────────┐ █
+│ Line 1                                            │ █
+│ Line 2                                            │ ░
+│ Line 3                                            │ ░
+│ Line 4                                            │ ░
+│ Line 5                                            │ ░
+│ ...                                               │ ░
+└────────────────────────────────────────────────────┘ █
+```
 
 ```typescript
 import { createScrollbar, createScrollbarState, renderStatefulScrollbar } from 'terminui';
