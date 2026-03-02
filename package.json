@@ -9,6 +9,14 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"import": "./dist/index.js"
+		},
+		"./jsx": {
+			"types": "./dist/jsx.d.ts",
+			"import": "./dist/jsx.js"
+		},
+		"./jsx-runtime": {
+			"types": "./dist/jsx-runtime.d.ts",
+			"import": "./dist/jsx-runtime.js"
 		}
 	},
 	"files": [
@@ -28,6 +36,14 @@
 		"terminal",
 		"ui",
 		"ratatui",
+		"react",
+		"ink",
+		"clack",
+		"blessed",
+		"terminal ui",
+		"text ui",
+		"text user interface",
+		"terminal user interface",
 		"cli"
 	],
 	"license": "Apache-2.0",

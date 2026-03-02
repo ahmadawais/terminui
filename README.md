@@ -73,6 +73,129 @@ Output:
 └──────────────────────────────────────────────────────┘
 ```
 
+## JSX API (React-like)
+
+You can keep the same terminal performance model and write UIs in a JSX style.
+
+`terminui` does not use a virtual DOM reconciler here; JSX is translated into the same widget render calls (`frameRenderWidget`, `frameRenderStatefulWidget`) and still uses the existing double-buffered diff renderer.
+
+```tsx
+/** @jsxImportSource terminui */
+import { createTestBackendState, createTestBackend, createTerminal } from 'terminui';
+import { terminalDrawJsx, Column, Row, Panel, Label, List, Gauge } from 'terminui/jsx';
+import { lengthConstraint, fillConstraint } from 'terminui';
+
+const state = createTestBackendState(60, 12);
+const terminal = createTerminal(createTestBackend(state));
+
+terminalDrawJsx(
+  terminal,
+  <Column constraints={[lengthConstraint(3), fillConstraint(1)]}>
+    <Panel title="Header" p={1}>
+      <Label text="JSX-powered terminal UI" align="center" bold />
+    </Panel>
+    <Row constraints={[fillConstraint(1), fillConstraint(1)]} gap={1}>
+      <Panel title="Menu">
+        <List items={['Overview', 'Metrics', 'Logs']} />
+      </Panel>
+      <Panel title="Load">
+        <Gauge percent={42} />
+      </Panel>
+    </Row>
+  </Column>,
+);
+```
+
+Available JSX components include `VStack`, `HStack`, `Box`, `Text`, `List`, `Table`, `Gauge`, `LineGauge`, `Tabs`, `Sparkline`, `BarChart`, `Scrollbar`, `Clear`, and `Cursor`.
+
+React-like aliases are also available:
+
+- `Row` = `HStack`
+- `Column` = `VStack`
+- `Panel` = `Box` with border enabled by default
+- `Label` = `Text`
+
+Common shorthand props:
+
+- `gap` on `Row` / `Column` for spacing
+- `p`, `px`, `py` for panel/widget padding
+- `border` and `title` for block setup
+- `fg`, `bg`, `bold` for style
+- `align` for text alignment
+
+Helper APIs:
+
+- `terminalDrawJsx(terminal, <UI />)`
+- `terminalLoopJsx(terminal, (frame, tick) => <UI />, { maxFrames: 120 })`
+
+### JSX Starter (Copy/Paste)
+
+Minimal `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "terminui"
+  }
+}
+```
+
+Minimal `hello.tsx`:
+
+```tsx
+/** @jsxRuntime automatic */
+/** @jsxImportSource terminui */
+import { createTestBackendState, createTestBackend, createTerminal, testBackendToString } from 'terminui';
+import { terminalDrawJsx, Panel, Label } from 'terminui/jsx';
+import { Color } from 'terminui';
+
+const state = createTestBackendState(40, 6);
+const terminal = createTerminal(createTestBackend(state));
+
+terminalDrawJsx(
+  terminal,
+  <Panel title="Hello JSX" p={1}>
+    <Label text="terminal UI, React-like syntax" fg={Color.Cyan} bold align="center" />
+  </Panel>,
+);
+
+console.log(testBackendToString(state));
+```
+
+### JSX Troubleshooting
+
+If you see a TypeScript error like:
+
+```text
+'X' cannot be used as a JSX component
+```
+
+check the following:
+
+1. Use `.tsx` files for JSX code.
+2. Use automatic JSX runtime with `terminui` as the import source.
+3. Import UI components from `terminui/jsx` (not from `react`).
+4. Make sure you are on a recent `terminui` version with JSX typing fixes.
+
+`tsconfig.json` example:
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "terminui"
+  }
+}
+```
+
+Per-file override (optional):
+
+```tsx
+/** @jsxRuntime automatic */
+/** @jsxImportSource terminui */
+```
+
 ## Architecture
 
 terminui follows a functional architecture with zero classes:
@@ -437,6 +560,15 @@ The double-buffered architecture ensures only changed cells are written between 
 Run the included examples:
 
 ```bash
+# Minimal JSX starter
+npx tsx examples/jsx-hello.tsx
+
+# Interactive fake-AI terminal chat demo
+npx tsx examples/jsx-chatbot.tsx
+
+# React-like JSX API demo
+npx tsx examples/jsx-dashboard.tsx
+
 # Dashboard rendered to primary screen
 npx tsx examples/primary-screen.ts
 
@@ -452,6 +584,18 @@ npx tsx examples/weather-dashboard.ts --city "New York"
 # One-shot weather snapshot (non-animated)
 npx tsx examples/weather-dashboard.ts --city "New York" --once
 ```
+
+`examples/jsx-chatbot.tsx` is the production-style reference for interactive terminal UX:
+
+- uses alternate screen and clears scrollback
+- uses `readline` keypress input in raw mode (no prompt spam)
+- uses diff-based cell updates with batched ANSI writes
+- uses a minimal, modern CLI layout (vim/blessed-like)
+- includes interactive controls:
+  - `Enter` send message
+  - `↑` / `↓` scroll conversation
+  - `/clear` reset chat history
+  - `Esc` or `Ctrl+C` quit cleanly
 
 ## Dev
 
