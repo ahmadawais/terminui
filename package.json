@@ -46,6 +46,10 @@
 		"terminal user interface",
 		"cli"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ahmadawais/terminui.git"
+	},
 	"license": "Apache-2.0",
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
