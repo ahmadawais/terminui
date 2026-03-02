@@ -12,11 +12,6 @@
 
 * add jsx api and modern chatbot demo ([#1](https://github.com/ahmadawais/terminui/issues/1)) ([50fc37c](https://github.com/ahmadawais/terminui/commit/50fc37c8a7cad9ce0b0c4a3d2470da3da8b556c8))
 * cli taste ([90e8d2c](https://github.com/ahmadawais/terminui/commit/90e8d2ccd6a49df8d66e4a529871883b4743a05a))
-
-## [0.3.0](https://github.com/ahmadawais/terminui/compare/0.2.0...0.3.0) (2026-03-02)
-
-### Features
-
 * add React-like JSX runtime and JSX component API for terminal UI composition
 * add new JSX examples: `jsx-hello`, `jsx-dashboard`, and interactive `jsx-chatbot`
 * improve `jsx-chatbot` with alternate-screen app loop, diff-based rendering, simple modern CLI layout, and conversation scrolling via `↑`/`↓`
