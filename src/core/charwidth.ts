@@ -28,8 +28,8 @@ const isWideChar = (code: number): boolean => {
 		(code >= 0x231a && code <= 0x231b) ||
 		(code >= 0x23e9 && code <= 0x23f3) ||
 		(code >= 0x23f8 && code <= 0x23fa) ||
-		code === 0x25b6 ||
-		code === 0x25c0 ||
+		code === 0x25b6 || // ▶ Black Right-Pointing Triangle
+		code === 0x25c0 || // ◀ Black Left-Pointing Triangle
 		(code >= 0x25fb && code <= 0x25fe) ||
 		(code >= 0x2614 && code <= 0x2615) ||
 		(code >= 0x2648 && code <= 0x2653) ||
