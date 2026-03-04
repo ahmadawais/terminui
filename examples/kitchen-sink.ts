@@ -181,7 +181,7 @@ const renderListShowcase = (frame: Frame, area: Rect, tick: number): void => {
 			tui.styleFg(tui.createStyle(), tui.Color.Black),
 			tui.Color.LightGreen,
 		),
-		highlightSymbol: '▶ ',
+		highlightSymbol: '❯ ',
 		repeatHighlightSymbol: true,
 		highlightSpacing: 'always',
 	});

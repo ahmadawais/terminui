@@ -338,7 +338,7 @@ Vertical scrollable list with selection:
 
 ```
 ┌Menu──────────────────────────────────────────────────┐
-│ ▶ Item 1                                             │
+│ ❯ Item 1                                             │
 │   Item 2                                             │
 │   Item 3                                             │
 │   Item 4                                             │
@@ -352,7 +352,7 @@ import { createList, createListState, renderStatefulList } from 'terminui';
 const list = createList(['Item 1', 'Item 2', 'Item 3'], {
   block: blockBordered({ titles: [createTitle('Menu')] }),
   highlightStyle: styleFg(createStyle(), Color.Yellow),
-  highlightSymbol: '▶ ',
+  highlightSymbol: '❯ ',
 });
 
 const state = createListState(0); // selected index

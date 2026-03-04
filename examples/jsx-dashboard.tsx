@@ -48,7 +48,7 @@ terminalDrawJsx(
 				<List
 					items={['Fetch data', 'Render widgets', 'Flush diff', 'Await input']}
 					state={listState}
-					highlightSymbol="▶ "
+					highlightSymbol="❯ "
 				/>
 			</Panel>
 			<Panel title="Progress">

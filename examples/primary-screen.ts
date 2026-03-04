@@ -80,7 +80,7 @@ const renderDashboard = (frame: Frame): void => {
 		{
 			block: blockBordered({ titles: [createTitle('Tasks')] }),
 			highlightStyle: styleBg(createStyle(), Color.DarkGray),
-			highlightSymbol: '▶ ',
+			highlightSymbol: '❯ ',
 		},
 	);
 	const listState = createListState(1);
