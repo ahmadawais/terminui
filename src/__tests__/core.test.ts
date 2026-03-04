@@ -582,6 +582,19 @@ describe('buffer', () => {
 		it('returns 0 for null char', () => {
 			expect(charWidth(0)).toBe(0);
 		});
+
+		it('returns 2 for emoji presentation characters', () => {
+			expect(charWidth(0x25b6)).toBe(2); // ▶
+			expect(charWidth(0x25c0)).toBe(2); // ◀
+			expect(charWidth(0x231a)).toBe(2); // ⌚
+			expect(charWidth(0x2614)).toBe(2); // ☔
+			expect(charWidth(0x2705)).toBe(2); // ✅
+		});
+
+		it('returns 1 for non-emoji symbols', () => {
+			expect(charWidth(0x276f)).toBe(1); // ❯
+			expect(charWidth(0x2500)).toBe(1); // ─ (box drawing)
+		});
 	});
 
 	describe('cellWidth', () => {
@@ -734,6 +747,19 @@ describe('text', () => {
 		it('returns false for ASCII', () => {
 			expect(isWideChar(65)).toBe(false);
 		});
+
+		it('returns true for emoji presentation characters', () => {
+			expect(isWideChar(0x25b6)).toBe(true); // ▶
+			expect(isWideChar(0x25c0)).toBe(true); // ◀
+			expect(isWideChar(0x231a)).toBe(true); // ⌚
+			expect(isWideChar(0x2728)).toBe(true); // ✨
+			expect(isWideChar(0x1f600)).toBe(true); // 😀
+		});
+
+		it('returns false for non-emoji symbols', () => {
+			expect(isWideChar(0x276f)).toBe(false); // ❯
+			expect(isWideChar(0x2500)).toBe(false); // ─ (box drawing)
+		});
 	});
 
 	describe('stringWidth', () => {
@@ -747,6 +773,11 @@ describe('text', () => {
 
 		it('returns 0 for empty string', () => {
 			expect(stringWidth('')).toBe(0);
+		});
+
+		it('returns correct width for emoji symbols', () => {
+			expect(stringWidth('▶ ')).toBe(3); // ▶ is 2-wide + space
+			expect(stringWidth('❯ ')).toBe(2); // ❯ is 1-wide + space
 		});
 	});
 
