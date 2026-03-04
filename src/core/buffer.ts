@@ -1,6 +1,7 @@
+import { isWideChar } from './charwidth';
+import type { Rect } from './layout';
 import type { Color, Style } from './style';
 import { Color as C, patchStyle } from './style';
-import type { Rect } from './layout';
 
 // Cell
 
@@ -52,22 +53,7 @@ const charWidth = (code: number): number => {
 	if (code === 0) {
 		return 0;
 	}
-	if (
-		(code >= 0x1100 && code <= 0x115f) ||
-		(code >= 0x2e80 && code <= 0x303e) ||
-		(code >= 0x3041 && code <= 0x33bf) ||
-		(code >= 0xfe30 && code <= 0xfe6f) ||
-		(code >= 0xff01 && code <= 0xff60) ||
-		(code >= 0xffe0 && code <= 0xffe6) ||
-		(code >= 0x20000 && code <= 0x2fffd) ||
-		(code >= 0x30000 && code <= 0x3fffd) ||
-		(code >= 0x4e00 && code <= 0x9fff) ||
-		(code >= 0xf900 && code <= 0xfaff) ||
-		(code >= 0xac00 && code <= 0xd7a3)
-	) {
-		return 2;
-	}
-	return 1;
+	return isWideChar(code) ? 2 : 1;
 };
 
 const cellWidth = (cell: Cell): number => {
